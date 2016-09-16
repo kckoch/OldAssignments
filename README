@@ -1,0 +1,11 @@
+Kyra Koch
+
+KNOWN PROBLEMS
+This code is not able to handle a timer firing off less than 50us.  It also is not able to deal with condition variables, and it has a bad habit of deadlocking.  Code also does not clean up after exiting, because that caused the other known problems to be worse.
+
+
+DESIGN
+For this project, I have three queues.  The first queue holds the currently running threads and recently exited threads.  Each thread in the queue holds an ID, a ucontext and a flag stating whether or not the thread exited.
+I have a results queue that holds the ID and result of a user given funciton.  And lastly I have a deadthread queue.  Due to shortcomings of the code, the deadthread queue isn't really used, but it was intended to help with cleaning up the code.
+
+I also have an array of locks the size of the variable NUM_LOCKS that hold an ID, a flag to determine if the lock is in use, and an array that stores whether a specific condition occured.  Again, due to the shortcomings of the code, it is unsure if the conditions work correctly.
